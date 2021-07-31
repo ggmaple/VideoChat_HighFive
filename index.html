@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.webrtc.ecl.ntt.com/skyway-4.4.1.js"></script>
+  <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.13.3"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@tensorflow-models/body-pix"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.2"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/body-pix@2.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/handtrackjs@0.0.13/dist/handtrack.min.js"></script>
+
+</head>
+  <title>ハイタッチビデオチャット</title>
+</head>
+<body>
+  <div>
+    <canvas id="my-canvas" width="400px" height="300px" style="border:solid 1px black;box-sizing:content-box;">
+      <video id="my-video" width="400px" height="300px" autoplay muted playsinline></video>  
+    </canvas>
+    <p>Your ID: <span id="my-id"></span></p>
+    <button onclick="start()">バーチャル背景</button>
+    <button id="mike-mute">ミュートオン</button>
+    <button id="video-mute">カメラをオフにする</button>
+    <button id="HighFive-mode">ハイタッチモード</button>
+  </div>
+  <div>
+    <span>相手のIDを入力:</span>
+    <textarea id="their-id" style="resize: none; width:150px; height:20px;"></textarea>
+    <button id="make-call">発信</button>
+    <button id="close-call">退出</button>
+  </div>  
+  <div>
+    <canvas id="their-canvas" width="400px" height="300px" style="border:solid 1px black;box-sizing:content-box;">
+      <video id="their-video" width="400px" height="300px" autoplay muted playsinline></video>  
+    </canvas>
+  </div>   
+  <script src="./VideoChat.js"></script>
+  <script src="./VirtualBack.js"></script>
+  <script src="./HandTrack.js"></script>   
+</body>
+</html>
