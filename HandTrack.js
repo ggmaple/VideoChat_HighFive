@@ -4,7 +4,7 @@ const myCanvas = document.getElementById("my-canvas");
 const my_ctx = myCanvas.getContext("2d");
 const theirCanvas = document.getElementById("their-canvas");
 const their_ctx = theirCanvas.getContext("2d");
-let isFirst = true;
+const HighFive_mode = document.getElementById("HighFive-mode");
 
 const options = {
     flipHorizontal: false, // 水平方向の反転
@@ -17,7 +17,10 @@ let model;  // 繰り返し利用するために読み込んだ機械学習モ�
 const hand = new Image();
 hand.src = "hand_right.png";  // 画像指定
 
-document.getElementById("HighFive-mode").addEventListener("click", HighFiveMode);
+HighFive_mode.addEventListener("click", HighFiveMode);
+
+// my_ctx.font = "18pt Arial";
+// my_ctx.fillText("モデル読込中...", 50, 50);
 
 handTrack.load(options).then(function(model_data) {
     model = model_data;
@@ -43,8 +46,10 @@ function startDetection() {
 function HighFiveMode() {
     if(state){
         state = false;
+        HighFive_mode.innerText = "ハイタッチモードをオンにする";
     }else{
         state = true;
+        HighFive_mode.innerText = "ハイタッチモードをオフにする";
         // requestAnimationFrame(startDetection);
         startDetection();
     }

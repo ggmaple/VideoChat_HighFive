@@ -14,6 +14,7 @@ var audioTrack = null;
 
 // キャプチャしたい canvas 要素を取得
 var canvasElt = document.querySelector('canvas');
+// var canvasElt = document.getElementById('my-canvas');
 
 // ストリームの取得（canvasの映像）
 var localStream = canvasElt.captureStream(60); // 60 FPS
@@ -50,7 +51,7 @@ mikeMute.onclick = function(){
       isMikePlay = true;
       audioTrack.enabled = true;
       
-      mikeMute.innerText = "ミュートオン";
+      mikeMute.innerText = "ミュートオンにする";
   }
 };
 
