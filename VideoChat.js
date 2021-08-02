@@ -13,8 +13,8 @@ var videoTrack = null;
 var audioTrack = null;
 
 // キャプチャしたい canvas 要素を取得
-var canvasElt = document.querySelector('canvas');
-// var canvasElt = document.getElementById('my-canvas');
+// var canvasElt = document.querySelector('canvas');
+var canvasElt = document.getElementById('my-canvas');
 
 // ストリームの取得（canvasの映像）
 var localStream = canvasElt.captureStream(60); // 60 FPS

@@ -2,9 +2,15 @@ const myVideo = document.getElementById("my-video");
 const theirVideo = document.getElementById("their-video");
 const myCanvas = document.getElementById("my-canvas");
 const my_ctx = myCanvas.getContext("2d");
-const theirCanvas = document.getElementById("their-canvas");
-const their_ctx = theirCanvas.getContext("2d");
+// const theirCanvas = document.getElementById("their-canvas");
+// const their_ctx = theirCanvas.getContext("2d");
 const HighFive_mode = document.getElementById("HighFive-mode");
+const testCanvas = document.getElementById("test-canvas");
+const test_ctx = testCanvas.getContext("2d");
+//キャンバスを左右反転
+test_ctx.scale(-1,1);
+test_ctx.translate(-400, 0);
+testCanvas.style.display = "none";
 
 const options = {
     flipHorizontal: false, // 水平方向の反転
@@ -19,8 +25,8 @@ hand.src = "hand_right.png";  // 画像指定
 
 HighFive_mode.addEventListener("click", HighFiveMode);
 
-// my_ctx.font = "18pt Arial";
-// my_ctx.fillText("モデル読込中...", 50, 50);
+// test_ctx.font = "18pt Arial";
+// test_ctx.fillText("モデル読込中...", 50, 50);
 
 handTrack.load(options).then(function(model_data) {
     model = model_data;
@@ -37,7 +43,8 @@ function startDetection() {
 
     //相手カメラの手を検出し、自カメラ映像に画像を反映
     model.detect(theirVideo).then(predictions => {
-        HandPrediction(predictions, my_ctx, myVideo);
+        // HandPrediction(predictions, my_ctx, myVideo);
+        HandPrediction(predictions, test_ctx, myVideo);
         if (state) requestAnimationFrame(startDetection);
     });
 }
@@ -47,10 +54,13 @@ function HighFiveMode() {
     if(state){
         state = false;
         HighFive_mode.innerText = "ハイタッチモードをオンにする";
+        myCanvas.style.display = "block";
+        testCanvas.style.display = "none";
     }else{
         state = true;
         HighFive_mode.innerText = "ハイタッチモードをオフにする";
-        // requestAnimationFrame(startDetection);
+        myCanvas.style.display = "none";
+        testCanvas.style.display = "block";
         startDetection();
     }
 }
@@ -70,7 +80,7 @@ function HandPrediction(predictions, ctx, video){
         const handWidth = prediction.bbox[2];
         const handHeight = prediction.bbox[3];
         // 手の画像を表示
-        ctx.drawImage(hand, x, y, handWidth, handHeight);
-       
+        ctx.drawImage(hand, x, y, handWidth, handHeight);       
       });
+
 }
